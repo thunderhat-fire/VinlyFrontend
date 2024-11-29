@@ -1,0 +1,31 @@
+/* Allow full scrolling without conflicts */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Full viewport height */
+  overflow-x: hidden; /* Hide horizontal overflow */
+  overflow-y: auto; /* Allow vertical scrolling */
+}
+
+.press-vinyl-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  position: relative; /* Allow it to follow normal document flow */
+}
+
+/* Ensure content headings have proper spacing */
+.page-title,
+h2,
+p {
+  margin-bottom: 20px;
+  line-height: 1.6; /* Improve readability */
+}
+
+/* Ensure the Stripe table expands as needed */
+stripe-pricing-table {
+  display: block;
+  width: 100%;
+  margin: 20px 0;
+}

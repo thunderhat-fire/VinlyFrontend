@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Root container flex layout for full height */
+#root-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the container takes up the full height of the viewport */
+}
+
+/* Main content area */
+.main-content {
+  flex: 1; /* Allows main content to grow to take available space */
+  padding: 20px;
+}
+
+/* Global styles for centering page titles */
+.page-title,
+.section-title {
+  text-align: center; /* Center-aligns the text */
+  margin-top: 30px; /* Space above the title */
+  margin-bottom: 30px; /* Space below the title */
+  color: black; /* Black text color for the titles */
+  padding: 10px; /* Padding around the title */
+}
+
+/* Specific heading styles for different levels if needed */
+.page-title {
+  font-size: 2rem; /* Font size for main page titles (h1) */
+}
+
+.section-title {
+  font-size: 1.5rem; /* Font size for section titles (h2, h3, etc.) */
+}
+
+/* Additional styles for h1, h2, h3, etc. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0; /* Remove default margins if necessary */
+  padding: 0; /* Remove default padding if necessary */
+}
+
+/* Navbar styling */
+.navbar {
+  width: 100%;
+  background-color: #322f2f; /* Example navbar background color */
+  padding: 15px 20px; /* Spacing around the navbar */
+}
+
+/* Footer styling to ensure correct positioning and visual distinction */
+.footer {
+  background-color: #333; /* Dark background for footer */
+  color: #fff; /* White text color for footer */
+  padding: 20px; /* Padding inside the footer */
+  text-align: center; /* Center-align text */
+  width: 100%; /* Full width of viewport */
+  position: relative; /* Let footer follow normal document flow */
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2); /* Optional: subtle shadow for visual effect */
+}
+
+/* Footer content styling */
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Footer links styling */
+.footer-links {
+  list-style-type: none; /* Remove default list styling */
+  padding: 0;
+  margin: 10px 0;
+  display: flex;
+  flex-wrap: wrap; /* Wrap links to fit on smaller screens */
+  justify-content: center; /* Center links horizontally */
+}
+
+.footer-links li {
+  margin: 0 15px; /* Horizontal spacing between links */
+}
+
+.footer-links a {
+  color: #fff; /* White color for links in footer */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+  color: #f0a500; /* Change color on hover for better visibility */
+}

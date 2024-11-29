@@ -1,0 +1,65 @@
+.faq-container {
+  position: relative;
+  z-index: 1; /* Keeps content above the animated grid */
+  padding: 60px;
+}
+
+.accordion {
+  margin-top: 0;  /* Remove space between accordion and previous section */
+}
+
+.accordion-item {
+  margin-bottom: 0;  /* Remove space between accordion items */
+}
+
+.accordion-header {
+  background-color: rgba(255, 255, 255, 0.9); /* White background with 60% opacity */
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  border: .5px solid #e7e1e1;
+  color: black;  /* Default color for questions */
+  transition: color 0.3s ease;  /* Smooth transition for color change */
+}
+
+.accordion-header:hover {
+  color: green;  /* Green text color on hover */
+}
+
+.accordion-content {
+  padding: 10px;
+  background-color: #fff;
+  display: none;
+}
+
+.accordion-content.active {
+  display: block;
+}
+
+.footer {
+  margin-top: 30px;
+}
+
+/* Page container */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the container takes up the full height of the viewport */
+}
+
+/* Content wrapper */
+.content-wrap {
+  flex: 1; /* Fills the remaining space, pushing the footer down */
+}
+
+/* Footer container */
+.footer {
+  background-color: #333; /* Dark background for the footer */
+  color: #fff; /* White text for contrast */
+  padding: 20px; /* Padding to provide space inside the footer */
+  text-align: center; /* Center the footer text */
+  width: 100%; /* Full width to cover the viewport */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for visual separation */
+}

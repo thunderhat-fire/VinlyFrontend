@@ -1,0 +1,76 @@
+.notification-bar {
+  background-color: #ffcc00;
+  color: #333;
+  padding: 10px 20px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  width: 100%;
+  z-index: 100;
+}
+
+.home-container {
+  padding-top: 15px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.crowdfund-item {
+  display: flex;
+  flex-direction: column; /* Ensure the image and text are stacked in mobile views */
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.crowdfund-content {
+  display: flex;
+  align-items: flex-start; /* Align the image and text side by side */
+}
+
+.crowdfund-image {
+  width: 50%; /* Take up half the width */
+  height: auto;
+  object-fit: cover;
+  margin-right: 20px; /* Space between image and details */
+}
+
+.crowdfund-details {
+  width: 50%;
+}
+
+.crowdfund-details p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .crowdfund-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .crowdfund-image {
+    width: 100%; /* Full width for mobile */
+    margin-bottom: 10px;
+  }
+
+  .crowdfund-details {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.slick-slide {
+  padding: 0 10px; /* Adds space between slides */
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 30px;
+  color: #333;
+}
