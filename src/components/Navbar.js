@@ -26,7 +26,7 @@ const Navbar = () => {
           <Link to="/press-vinyl">Press Vinyl</Link>
         </li>
         <li>
-          <Link to="/crowdfunding-gallery">Live Funds</Link>
+          <Link to="/crowdfunding-gallery">Live Crowdfunds</Link>
         </li>
         <li>
           <Link to="/FAQ">FAQ</Link>

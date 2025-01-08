@@ -51,7 +51,7 @@ const NewProjectImages = ({
       if (validFileTypes.includes(file?.type)) {
         const { width, height } = await getImageDimensions(file);
 
-        if (width >= 2000 && height >= 2000) {
+        if (width >= 2000 && height >= 2000 && width === height) {
           setUploadStates((prevState) => ({
             ...prevState,
             [name]: "uploading",
@@ -81,7 +81,9 @@ const NewProjectImages = ({
             setUploadStates((prevState) => ({ ...prevState, [name]: "error" }));
           }
         } else {
-          setAlertMessage("Image must be at least 2000 x 2000 resolution");
+          setAlertMessage(
+            "Image must be at least 2000 x 2000 resolution and exactly square"
+          );
         }
       } else {
         setAlertMessage("Invalid file format. Choose from PNG, JPEG, or WEBP.");
@@ -122,7 +124,8 @@ const NewProjectImages = ({
     <>
       <form onSubmit={onSubmit} className="signup-form">
         <Typography>
-          Please select images for your front and back cover. These should be in
+          Please select images for your front and back cover. These should be
+          square images (width and height are the same number of pixels) in
           webp, png, or jpg format with minimum dimensions 2000 x 2000 pixels.
         </Typography>
         <Grid container spacing={2} direction="column" justifyContent="center">

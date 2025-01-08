@@ -45,9 +45,10 @@ const NewProjectAudio = ({
               {
                 file,
                 side,
-                streamable: false,
+                preview: false,
                 length,
                 title,
+                id: `${new Date().getTime()}${Math.random()}`,
               },
             ]);
           }
@@ -59,7 +60,14 @@ const NewProjectAudio = ({
           } else {
             setBTracks([
               ...bTracks,
-              { file, side, title, streamable: false, length },
+              {
+                file,
+                side,
+                preview: false,
+                length,
+                title,
+                id: `${new Date().getTime()}${Math.random()}`,
+              },
             ]);
           }
         }
@@ -80,10 +88,7 @@ const NewProjectAudio = ({
     }
   };
 
-  const uploadSong = async (
-    { file, title, side, streamable, length },
-    track
-  ) => {
+  const uploadSong = async ({ file, title, side, preview, length }, track) => {
     try {
       const formData = new FormData();
       formData.append("songFile", file);
@@ -92,7 +97,7 @@ const NewProjectAudio = ({
       formData.append("title", title);
       formData.append("track", track); //track number
       formData.append("side", side);
-      formData.append("preview", streamable);
+      formData.append("preview", preview);
       formData.append("length", length);
       for (var pair of formData.entries()) {
         console.log(pair[0] + ", " + pair[1]);
@@ -114,6 +119,13 @@ const NewProjectAudio = ({
       return;
     } else if (bTracks.length === 0) {
       setAlertMessage("Add tracks to side B to continue");
+      return;
+    } else if (
+      aTracks.filter((track) => track.preview).length +
+        bTracks.filter((track) => track.preview).length !==
+      1
+    ) {
+      setAlertMessage("You need to choose a preview track to continue");
       return;
     }
     setUploadState("uploading");
@@ -141,24 +153,43 @@ const NewProjectAudio = ({
     );
     setTimeout(() => setActiveStep(3), 1000);
   };
+
+  const previewHandler = (id) => {
+    setATracks((prevATracks) =>
+      prevATracks.map((track) => ({
+        ...track,
+        preview: track.id === id,
+      }))
+    );
+
+    setBTracks((prevBTracks) =>
+      prevBTracks.map((track) => ({
+        ...track,
+        preview: track.id === id,
+      }))
+    );
+  };
   console.log(aTracks, bTracks);
+  const sideStyle = { width: "400px" };
   return (
     <>
       <Typography textAlign={`center`}>
         Please select the audio tracks you want to use on your record. These
         should be in wav format and you are limited to 22 minutes total length
-        per side. You may select one of your songs to be used as a demo stream
-        on your project page.
+        per side. You may select only one of your songs to be used as a demo
+        stream on your project page by setting the preview button.
       </Typography>
       <Grid container direction={"row"} spacing={2} justifyContent="center">
-        <Grid item xs={6}>
+        <Grid item xs={6} sx={sideStyle}>
           <Typography textAlign={`center`}>Side A</Typography>
           {aTracks.map((e, i) => (
             <AddedTrackItem
               title={e.title}
               length={e.length}
-              streamable={e.streamable}
+              preview={e.preview}
               complete={i + 1 <= completedUploadsA ? true : false}
+              previewHandler={previewHandler}
+              id={e.id}
             />
           ))}
           <AudioListItem
@@ -174,14 +205,16 @@ const NewProjectAudio = ({
             {getSideLength(aTracks).secs} seconds
           </Paper>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={6} sx={sideStyle}>
           <Typography textAlign={`center`}>Side B</Typography>
           {bTracks.map((e, i) => (
             <AddedTrackItem
               title={e.title}
               length={e.length}
-              streamable={e.streamable}
+              preview={e.preview}
               complete={i + 1 <= completedUploadsB ? true : false}
+              previewHandler={previewHandler}
+              id={e.id}
             />
           ))}
           <AudioListItem

@@ -70,7 +70,10 @@ const NewProjectConfirm = ({ projectId, user, setAlertMessage }) => {
                 </Typography>
                 <ul>
                   {filterAndSortSongs("a").map((e) => (
-                    <li>{e.title}</li>
+                    <li>
+                      <span>{e.title}</span>
+                      {e.preview && <span>Preview track</span>}
+                    </li>
                   ))}
                 </ul>
               </Box>
@@ -80,7 +83,10 @@ const NewProjectConfirm = ({ projectId, user, setAlertMessage }) => {
                 </Typography>
                 <ul>
                   {filterAndSortSongs("b").map((e) => (
-                    <li>{e.title}</li>
+                    <li>
+                      <span>{e.title}</span>
+                      {e.preview && <span>{` `}Preview track</span>}
+                    </li>
                   ))}
                 </ul>
               </Box>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './FAQ.css';
 import Footer from '../components/Footer';
-import { AnimatedGridPattern } from '../components/AnimatedGridPattern'; // Import the AnimatedGridPattern
 
 const accordionData = [
   {
@@ -70,41 +69,35 @@ const FAQ = () => {
   };
 
   return (
-    <div className="faq-container">
-      {/* Animated Grid Pattern Component */}
-      <AnimatedGridPattern 
-        width={40}
-        height={40}
-        numSquares={50}
-        maxOpacity={0.5}
-        duration={4}
-        repeatDelay={0.5}
-        className="absolute inset-0 z-[-1]" // Ensuring it stays behind the content
-      />
+//    <>
+//<div className="polka-dots"></div>
 
-    
+      <div className="faq-container">
+        <h2>Your Questions Answered</h2>
+        <h4>How It Works</h4>
+        <p>We will outline our terms here</p>
 
-      <div className="accordion">
-        {accordionData.map((item, index) => (
-          <div className="accordion-item" key={index}>
-            <button
-              className="accordion-header"
-              onClick={() => toggleAccordion(index)}
-            >
-              {item.question}
-            </button>
-            <div
-              className={`accordion-content ${
-                activeIndex === index ? 'active' : ''
-              }`}
-            >
-              <p>{item.answer}</p>
+        <div className="accordion">
+          {accordionData.map((item, index) => (
+            <div className="accordion-item" key={index}>
+              <button
+                className="accordion-header"
+                onClick={() => toggleAccordion(index)}
+              >
+                {item.question}
+              </button>
+              <div
+                className={`accordion-content ${
+                  activeIndex === index ? 'active' : ''
+                }`}
+              >
+                <p>{item.answer}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-
-    </div>
+//</>
   );
 };
 

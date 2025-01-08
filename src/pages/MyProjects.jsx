@@ -37,20 +37,25 @@ const MyProjects = ({ user, setAlertMessage }) => {
       <div style={{ textAlign: "center" }}>
         <h2>My Projects</h2>
 
-        <Grid container wrap justifyContent="center" spacing={2}>
+        <Grid container wrap="wrap" justifyContent="center" spacing={2}>
           {apiData &&
-            apiData.map((e) => (
-              <Grid item>
-                <Card sx={{ width: "300px", height: "300px" }}>
-                  <Typography component="h3" variant="h6">
-                    {e.projectTitle}
-                  </Typography>
-                  <Typography>{e.artist}</Typography>
-                  <img
-                    src={e.frontCover}
-                    style={{ width: "90%", borderRadius: "10px" }}
-                  />
-                </Card>
+            apiData.map((e, i) => (
+              <Grid item key={e.projectId}>
+                <Link
+                  to={`/crowdfund-details/${e.projectId}`}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <Card sx={{ width: "300px", height: "300px" }}>
+                    <Typography component="h3" variant="h6">
+                      {e.projectTitle}
+                    </Typography>
+                    <Typography>{e.artist}</Typography>
+                    <img
+                      src={e.frontCover}
+                      style={{ width: "90%", borderRadius: "10px" }}
+                    />
+                  </Card>
+                </Link>
               </Grid>
             ))}
         </Grid>
