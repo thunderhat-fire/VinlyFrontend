@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
+import Drawer from "@mui/material/Drawer";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import UserMenu from "./UserMenu";
@@ -51,7 +52,15 @@ const Navbar = () => {
                 }}
                 onClick={() => menuClickHandler()}
               />
-              {showMenu && <UserMenu />}
+              <Drawer
+                anchor="right"
+                open={showMenu}
+                onClose={() => setShowMenu(false)}
+                onClick={() => setShowMenu(false)}
+              >
+                <UserMenu />
+              </Drawer>
+              {/* {showMenu && <UserMenu />} */}
             </li>
           </>
         ) : (

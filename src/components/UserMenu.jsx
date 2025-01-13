@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 
 const UserMenu = () => {
   const menuStyle = {
-    position: "absolute",
+    // position: "absolute",
     zIndex: "10",
     background: "grey",
 
-    display: "flex",
-    flexDirection: "column",
-    right: 0,
+    // display: "flex",
+    // flexDirection: "column",
+    // right: 0,
   };
   return (
     <>
