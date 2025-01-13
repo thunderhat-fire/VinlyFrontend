@@ -51,7 +51,7 @@ const MyProjects = ({ user, setAlertMessage }) => {
                     </Typography>
                     <Typography>{e.artist}</Typography>
                     <img
-                      src={e.frontCover}
+                      src={`${apiStem}/images/thumb/${e.frontCover}`}
                       style={{ width: "90%", borderRadius: "10px" }}
                     />
                   </Card>
