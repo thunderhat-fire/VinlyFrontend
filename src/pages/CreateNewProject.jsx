@@ -5,39 +5,54 @@ import NewProjectConfirm from "../components/NewProjectConfirm";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import { Navigate } from "react-router-dom";
-
+import { useNavigate, useParams } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Button, Card, Box } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "axios"; // Ensure axios is imported
 
-const createNewProject = ({ setAlertMessage, user }) => {
-  const [doRedirect, setDoRedirect] = useState(false);
-
+const createNewProject = ({ setAlertMessage }) => {
+  const { user, isAuthenticated, isLoading, error } = useAuth0();
+  const { tempProjectId } = useParams();
+  // const [doRedirect, setDoRedirect] = useState(false);
+  const navigate = useNavigate();
   const [projectId, setProjectId] = useState("");
   const steps = ["Information", "Images", "Audio", "Complete"];
   const [activeStep, setActiveStep] = useState(0);
   const [thumbUrls, setThumbUrls] = useState({}); // Store thumbnail URLs
 
   useEffect(() => {
-    if (!user?.sub) {
-      // Redirect to home if user is not present
-      setDoRedirect(true);
-      return;
+    if (user) {
+      const active = JSON.parse(localStorage.getItem("activeProject"));
+      if (active && active.active) {
+        setProjectId(active.active);
+        setActiveStep(active.activeStep || 0);
+      } else {
+        const newId = `${new Date().getTime()}_${user.sub}`;
+        setProjectId(newId);
+        localStorage.setItem(
+          "activeProject",
+          JSON.stringify({ active: newId, activeStep: 0 })
+        );
+      }
     }
-    const active = JSON.parse(localStorage.getItem("activeProject"));
-    if (active && active.active) {
-      setProjectId(active.active);
-      setActiveStep(active.activeStep || 0);
-    } else {
-      const newId = `${new Date().getTime()}_${user.sub}`;
-      setProjectId(newId);
-      localStorage.setItem(
-        "activeProject",
-        JSON.stringify({ active: newId, activeStep: 0 })
-      );
-    }
-  }, [user]);
+    const checkAuthAndPayment = () => {
+      if (isLoading) {
+        return; // Wait for auth to complete
+      }
+
+      if (!isAuthenticated || !tempProjectId) {
+        navigate("/"); // Redirect to home if not authenticated
+        return;
+      }
+    };
+
+    checkAuthAndPayment();
+  }, [isAuthenticated, isLoading, navigate, user]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   const handleImageUpload = async (file, name) => {
     try {
@@ -85,7 +100,7 @@ const createNewProject = ({ setAlertMessage, user }) => {
 
   return (
     <>
-      {doRedirect && <Navigate replace to="/" />}
+      {/* {doRedirect && <Navigate replace to="/" />} */}
       <h2>Create New Project</h2>
       <Card raised={true} sx={{ borderRadius: "10px" }}>
         {activeStep === 0 && (
@@ -93,6 +108,7 @@ const createNewProject = ({ setAlertMessage, user }) => {
             setActiveStep={setActiveStep}
             setAlertMessage={setAlertMessage}
             projectId={projectId}
+            tempProjectId={tempProjectId}
             user={user}
           />
         )}

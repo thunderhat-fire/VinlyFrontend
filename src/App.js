@@ -22,6 +22,8 @@ import UpdateDetails from "./pages/UpdateDetails";
 import MyProjects from "./pages/MyProjects";
 import DeleteAccount from "./pages/DeleteAccount";
 import CreateNewProject from "./pages/CreateNewProject";
+import PaymentFailed from "./pages/PaymentFailed";
+import PaymentWaiting from "./pages/PaymentWaiting";
 import Toast from "./components/Toast";
 import "./App.css";
 import "slick-carousel/slick/slick.css";
@@ -51,6 +53,11 @@ function App() {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/userProfile" element={<Profile />} />
+          <Route path="/paymentFailed" element={<PaymentFailed />} />
+          <Route
+            path="/processingPayment"
+            element={<PaymentWaiting setAlertMessage={setAlertMessage} />}
+          />
           <Route
             path="/signup"
             element={<SignUp setAlertMessage={setAlertMessage} />}

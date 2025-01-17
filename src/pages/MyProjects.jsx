@@ -60,7 +60,7 @@ const MyProjects = ({ user, setAlertMessage }) => {
             ))}
         </Grid>
         <Box sx={{ margin: "20px" }}>
-          <Link to="/createNewProject">Create New Project</Link>
+          <Link to="/press-vinyl">Create New Project</Link>
         </Box>
       </div>
     </>

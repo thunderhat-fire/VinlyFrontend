@@ -13,6 +13,7 @@ import { validateField, validateProjectText } from "../utils/joi";
 const NewProjectText = ({
   setAlertMessage,
   projectId,
+  tempProjectId,
   user,
   setActiveStep,
 }) => {
@@ -50,6 +51,7 @@ const NewProjectText = ({
           ...textData,
           ownerId: user.sub,
           projectId,
+          tempProjectId,
         });
         localStorage.setItem(
           "activeProject",

@@ -16,13 +16,16 @@ function Home() {
   useEffect(() => {
     // Fetch the latest crowdfunds
     const fetchCrowdfunds = async () => {
-      const response = await fetch(`${apiStem}/projects/allProjects?limit=5`);
-      const data = await response.json();
-      console.log(response);
+      try {
+        const response = await fetch(`${apiStem}/projects/allProjects?limit=5`);
+        const data = await response.json();
+        console.log(response);
 
-      setCrowdfunds(data);
+        setCrowdfunds(data);
+      } catch (error) {
+        console.error("Error fetching crowdfunds:", error);
+      }
     };
-
     fetchCrowdfunds();
   }, []);
 
@@ -62,38 +65,40 @@ function Home() {
       <div className="crowdfunds-slider">
         <h2>Latest Completed Crowdfunds</h2>
 
-        <Carousel
-          animation="slide"
-          indicators={true}
-          navButtonsAlwaysVisible={true}
-          sx={{ width: "100%", maxWidth: 800, margin: "0 auto" }}
-        >
-          {crowdfunds.map((project, i) => (
-            <Paper key={i} width="300px" height="300px">
-              <Link
-                to={`/crowdfund-details/${project.projectId}`}
-                style={{ textDecoration: "none" }}
-              >
-                <Card sx={{ display: "flex", flexDirection: "column" }}>
-                  <CardMedia
-                    component="img"
-                    height="200"
-                    image={`${apiStem}/images/thumb/${project.frontCover}`}
-                    alt={project.projectTitle}
-                  />
-                  <CardContent>
-                    <Typography variant="h6" component="h3">
-                      {project.projectTitle}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Artist: {project.artist}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Link>
-            </Paper>
-          ))}
-        </Carousel>
+        {crowdfunds.length > 0 && (
+          <Carousel
+            animation="slide"
+            indicators={true}
+            navButtonsAlwaysVisible={true}
+            sx={{ width: "100%", maxWidth: 800, margin: "0 auto" }}
+          >
+            {crowdfunds.map((project, i) => (
+              <Paper key={i} width="300px" height="300px">
+                <Link
+                  to={`/crowdfund-details/${project.projectId}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Card sx={{ display: "flex", flexDirection: "column" }}>
+                    <CardMedia
+                      component="img"
+                      height="200"
+                      image={`${apiStem}/images/thumb/${project.frontCover}`}
+                      alt={project.projectTitle}
+                    />
+                    <CardContent>
+                      <Typography variant="h6" component="h3">
+                        {project.projectTitle}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        Artist: {project.artist}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </Paper>
+            ))}
+          </Carousel>
+        )}
         {/* 
         <Slider {...settings}>
           {completedCrowdfunds.map((crowdfund) => (
