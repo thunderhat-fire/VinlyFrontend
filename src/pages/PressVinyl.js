@@ -4,16 +4,25 @@ import { v4 as uuidv4 } from "uuid";
 import { loadStripe } from "@stripe/stripe-js";
 import "./PressVinyl.css";
 import { apiStem } from "../utils/variables";
+import { Tooltip, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 function PressVinyl() {
   const [loading, setLoading] = useState(false);
+  const [hasActiveProject, setHasActiveProject] = useState(false);
+
+  useEffect(() => {
+    const active = JSON.parse(localStorage.getItem("activeProject"));
+    setHasActiveProject(!!active && active.active);
+  }, []);
+
   const stripePromise = loadStripe(
     "pk_test_51PzLeoEKvyVjwQKIqxe3hsiH0NTcK8YiqiS3DiNQWJw1pGf2q9TzNenKWPsILsWP4S7Tiv7eSrdpBVXGr8h8L6Ro000g9iEpGZ"
   ); // Replace with your actual Stripe publishable key
-  const handlePayment = async (priceId) => {
+  const handlePayment = async (priceId, target) => {
     try {
       setLoading(true);
       const tempProjectId = uuidv4(); // Generate a unique tempProjectId
-      console.log("tempId", tempProjectId);
+
       // Get Stripe instance
       const stripe = await stripePromise;
 
@@ -28,6 +37,7 @@ function PressVinyl() {
           body: JSON.stringify({
             priceId,
             tempProjectId,
+            target,
           }),
         }
       );
@@ -47,6 +57,25 @@ function PressVinyl() {
       setLoading(false);
     }
   };
+
+  const renderButton = (text, onClick) => (
+    <Tooltip
+      title={
+        hasActiveProject ? "Please complete your active project first" : ""
+      }
+    >
+      <span>
+        <Button
+          variant="contained"
+          onClick={onClick}
+          disabled={hasActiveProject || loading}
+          sx={{ m: 1 }}
+        >
+          {loading ? "Processing..." : text}
+        </Button>
+      </span>
+    </Tooltip>
+  );
 
   return (
     <>
@@ -76,22 +105,39 @@ function PressVinyl() {
         <div className="press-vinyl-container">
           <h1 className="page-title">Press Your Vinyl with VinylFunders</h1>
           <h2>One-Time Mastering Fee - Then Set a Crowdfund to Press Vinyl!</h2>
-
+          {hasActiveProject && (
+            <p>
+              <Link to="/createNewProject">Complete Your Active Project</Link>
+            </p>
+          )}
           {/* Add payment buttons */}
           <div className="pricing-options">
-            <button
-              onClick={() => handlePayment("price_1Qhtn4EKvyVjwQKIQB8ZVP1k")}
+            {/* <button
+              onClick={() =>
+                handlePayment("price_1Qhtn4EKvyVjwQKIQB8ZVP1k", 100000)
+              } //price id and target to raise in pence
               disabled={loading}
             >
               Standard Package - £99
             </button>
 
-            <button
-              onClick={() => handlePayment("price_premium")}
-              disabled={loading}
-            >
+            <button onClick={() => handlePayment("#")} disabled={loading}>
               Premium Package - £199
             </button>
+          </div> */}
+            {/* <div> */}
+
+            {renderButton("Press 50 Records", () =>
+              handlePayment("price_1Qhtn4EKvyVjwQKIQB8ZVP1k", 100000)
+            )}
+            {renderButton("Press 100 Records", () =>
+              handlePayment("price_100", 200000)
+            )}
+            {renderButton(
+              "Press 300 Records",
+              () => handlePayment("price_300"),
+              600000
+            )}
           </div>
 
           {loading && <p>Processing payment...</p>}

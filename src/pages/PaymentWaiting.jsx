@@ -7,6 +7,7 @@ const PaymentWaiting = ({ setAlertMessage }) => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const tempProjectId = searchParams.get("tempProjectId");
+  const target = searchParams.get("target");
   const [status, setStatus] = useState("loading");
   const [error, setError] = useState(null);
   const pollingInterval = 1000; // Check every 3 seconds
@@ -69,7 +70,10 @@ const PaymentWaiting = ({ setAlertMessage }) => {
   if (status === "loading") return <p>Loading...</p>;
   if (status === "confirmed")
     setTimeout(
-      () => navigate(`/createNewProject?tempProjectId=${tempProjectId}`),
+      () =>
+        navigate(
+          `/createNewProject?tempProjectId=${tempProjectId}&target=${target}`
+        ),
       1000
     );
   if (error) return <p>{error}</p>;

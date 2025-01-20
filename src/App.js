@@ -10,6 +10,7 @@ import CrowdfundDetails from "./pages/CrowdfundDetails";
 // import CreateCrowdfund from "./pages/CreateCrowdfund";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Contact from "./pages/Contact";
 import Process from "./pages/Process";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
@@ -40,13 +41,17 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/press-Vinyl" element={<PressVinyl />} />
           <Route path="/crowdfunds" element={<Crowdfunds />} />
           <Route
             path="/crowdfunding-gallery"
             element={<CrowdfundingGallery />}
           />
-          <Route path="/crowdfund-details/:id" element={<CrowdfundDetails />} />
+          <Route
+            path="/crowdfund-details/:id"
+            element={<CrowdfundDetails setAlertMessage={setAlertMessage} />}
+          />
           {/* <Route path="/createcrowdfund" element={<CreateCrowdfund />} /> */}
           <Route path="/process" element={<Process />} />
           <Route path="/terms" element={<Terms />} />

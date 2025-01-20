@@ -109,3 +109,38 @@ textarea {
     padding: 10px 15px;
   }
 }
+
+.print-content {
+  display: none;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .print-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    visibility: visible;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .print-content * {
+    visibility: visible;
+    margin: 10px 0;
+  }
+
+  .print-content img {
+    max-width: 200px;
+    height: auto;
+  }
+}

@@ -5,7 +5,7 @@ import NewProjectConfirm from "../components/NewProjectConfirm";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button, Card, Box } from "@mui/material";
 import { useState, useEffect } from "react";
@@ -13,7 +13,16 @@ import axios from "axios"; // Ensure axios is imported
 
 const createNewProject = ({ setAlertMessage }) => {
   const { user, isAuthenticated, isLoading, error } = useAuth0();
-  const { tempProjectId } = useParams();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  console.log(searchParams);
+  const tempProjectId =
+    searchParams.get("tempProjectId") ||
+    JSON.parse(localStorage.getItem("activeProject")).tempProjectId;
+  const target =
+    searchParams.get("target") ||
+    JSON.parse(localStorage.getItem("activeProject")).target;
+  console.log(tempProjectId, target);
   // const [doRedirect, setDoRedirect] = useState(false);
   const navigate = useNavigate();
   const [projectId, setProjectId] = useState("");
@@ -32,7 +41,12 @@ const createNewProject = ({ setAlertMessage }) => {
         setProjectId(newId);
         localStorage.setItem(
           "activeProject",
-          JSON.stringify({ active: newId, activeStep: 0 })
+          JSON.stringify({
+            active: newId,
+            activeStep: 0,
+            tempProjectId,
+            target,
+          })
         );
       }
     }
@@ -41,7 +55,7 @@ const createNewProject = ({ setAlertMessage }) => {
         return; // Wait for auth to complete
       }
 
-      if (!isAuthenticated || !tempProjectId) {
+      if (!isAuthenticated) {
         navigate("/"); // Redirect to home if not authenticated
         return;
       }
@@ -109,6 +123,7 @@ const createNewProject = ({ setAlertMessage }) => {
             setAlertMessage={setAlertMessage}
             projectId={projectId}
             tempProjectId={tempProjectId}
+            target={target}
             user={user}
           />
         )}

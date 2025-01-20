@@ -9,10 +9,11 @@ import { Link } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import { Button } from "@mui/material";
 function Home() {
   const [crowdfunds, setCrowdfunds] = useState([]);
   const [showNotification, setShowNotification] = useState(true);
-
+  const activeProject = JSON.parse(localStorage.getItem("activeProject"));
   useEffect(() => {
     // Fetch the latest crowdfunds
     const fetchCrowdfunds = async () => {
@@ -61,6 +62,20 @@ function Home() {
           browse vinyl crowdfunding projects today!
         </p>
       </div>
+      {activeProject && activeProject.active && (
+        <div className="active-project-notification">
+          <p>
+            You have an unfinished project! Click here to view or edit it.
+            <Button
+              variant="contained"
+              color="primary"
+              href="/createNewProject"
+            >
+              View Unfinished Project
+            </Button>
+          </p>
+        </div>
+      )}
 
       <div className="crowdfunds-slider">
         <h2>Latest Completed Crowdfunds</h2>

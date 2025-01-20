@@ -14,6 +14,7 @@ const NewProjectText = ({
   setAlertMessage,
   projectId,
   tempProjectId,
+  target,
   user,
   setActiveStep,
 }) => {
@@ -46,12 +47,13 @@ const NewProjectText = ({
         setAlertMessage("Form incomplete - check and resubmit");
       } else {
         console.log(textData);
-
+        console.log(tempProjectId);
         const result = await axios.post(`${apiStem}/projects`, {
           ...textData,
           ownerId: user.sub,
           projectId,
           tempProjectId,
+          fundTarget: target,
         });
         localStorage.setItem(
           "activeProject",
