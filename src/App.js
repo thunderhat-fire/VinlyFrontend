@@ -25,6 +25,7 @@ import DeleteAccount from "./pages/DeleteAccount";
 import CreateNewProject from "./pages/CreateNewProject";
 import PaymentFailed from "./pages/PaymentFailed";
 import PaymentWaiting from "./pages/PaymentWaiting";
+import ConfirmFunder from "./pages/ConfirmFunder";
 import Toast from "./components/Toast";
 import "./App.css";
 import "slick-carousel/slick/slick.css";
@@ -62,6 +63,10 @@ function App() {
           <Route
             path="/processingPayment"
             element={<PaymentWaiting setAlertMessage={setAlertMessage} />}
+          />
+          <Route
+            path="/confirmFunder"
+            element={<ConfirmFunder setAlertMessage={setAlertMessage} />}
           />
           <Route
             path="/signup"

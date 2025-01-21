@@ -9,7 +9,7 @@ import { apiStem } from "../utils/variables";
 import { Button } from "@mui/material";
 import PrintIcon from "@mui/icons-material/Print";
 import { loadStripe } from "@stripe/stripe-js";
-
+import { v4 as uuidv4 } from "uuid";
 const PrintComponent = React.forwardRef(({ project }, ref) => (
   <div ref={ref} className="print-content">
     <h2>{project.projectTitle}</h2>
@@ -82,6 +82,7 @@ const CrowdfundDetails = ({ setAlertMessage }) => {
     const stripe = await stripePromise;
     try {
       setIsLoading(true);
+      const paymentRef = uuidv4(); // Generate a unique paymentRef
       const response = await fetch(
         `${apiStem}/funders/create-checkout-session`,
         {
@@ -92,6 +93,7 @@ const CrowdfundDetails = ({ setAlertMessage }) => {
           body: JSON.stringify({
             priceId: "price_1QjMADEKvyVjwQKI8ruDHPXf", // Your Stripe price ID
             projectId: id,
+            paymentRef,
           }),
         }
       );
