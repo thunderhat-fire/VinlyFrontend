@@ -1,0 +1,57 @@
+/* Footer container */
+.footer {
+  background-color: #333; /* Dark background for the footer */
+  color: #fff; /* White text for contrast */
+  padding: 20px; /* Padding to provide space inside the footer */
+  text-align: center; /* Center the footer text */
+  width: 100%; /* Full width to cover the viewport */
+  position: relative; /* Normal document flow */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for visual separation */
+}
+
+/* Footer content */
+.footer-content {
+  max-width: 1200px; /* Limit the width to prevent stretching */
+  margin: 0 auto; /* Center content horizontally */
+}
+
+/* Footer links */
+.footer-links {
+  list-style: none; /* Remove default list styling */
+  padding: 0;
+  margin: 15px 0;
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  justify-content: center; /* Center links horizontally */
+  gap: 20px; /* Consistent spacing between links */
+}
+
+.footer-links li {
+  margin: 0; /* Removed margin in favor of gap for consistency */
+}
+
+.footer-links a {
+  color: #fff; /* White link color for visibility */
+  text-decoration: none; /* Remove default underline */
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.footer-links a:hover {
+  color: #f0a500; /* Change color on hover for emphasis */
+  text-decoration: underline; /* Underline on hover for better feedback */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .footer {
+    padding: 15px; /* Reduce padding for smaller screens */
+  }
+
+  .footer-links {
+    gap: 15px; /* Reduce spacing between links for smaller screens */
+  }
+
+  .footer-content {
+    padding: 0 10px; /* Add horizontal padding for content on smaller screens */
+  }
+}

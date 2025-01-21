@@ -1,0 +1,45 @@
+body {
+  margin: 0; /* Remove any default margin to avoid overflow issues */
+  height: 100vh; /* Make sure the body height is always equal to the viewport height */
+  overflow: auto;
+  position: relative;
+}
+
+/* Existing FAQ styles */
+
+.accordion {
+  max-width: 600px;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.accordion-item {
+  border-top: 1px solid #ccc;
+}
+
+.accordion-header {
+  width: 100%;
+  text-align: left;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.accordion-header:hover {
+  background-color: #e0e0e0;
+}
+
+.accordion-content {
+  padding: 15px;
+  display: none;
+  background-color: #fff;
+}
+
+.accordion-content.active {
+  display: block;
+}
