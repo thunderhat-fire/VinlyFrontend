@@ -94,6 +94,8 @@ const CrowdfundDetails = ({ setAlertMessage }) => {
             priceId: "price_1QjMADEKvyVjwQKI8ruDHPXf", // Your Stripe price ID
             projectId: id,
             paymentRef,
+            projectTitle: project.projectTitle,
+            artist: project.artist,
           }),
         }
       );
