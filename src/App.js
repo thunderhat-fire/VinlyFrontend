@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import PressVinyl from "./pages/PressVinyl";
 import CrowdfundingGallery from "./pages/CrowdfundingGallery";
-import Crowdfunds from "./pages/Crowdfunds";
+// import Crowdfunds from "./pages/Crowdfunds";
 import CrowdfundDetails from "./pages/CrowdfundDetails";
 // import CreateCrowdfund from "./pages/CreateCrowdfund";
 import Navbar from "./components/Navbar";
@@ -44,7 +44,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/press-Vinyl" element={<PressVinyl />} />
-          <Route path="/crowdfunds" element={<Crowdfunds />} />
+          {/* <Route path="/crowdfunds" element={<Crowdfunds />} /> */}
           <Route
             path="/crowdfunding-gallery"
             element={<CrowdfundingGallery />}
